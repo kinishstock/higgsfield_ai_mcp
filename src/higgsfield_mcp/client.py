@@ -81,7 +81,10 @@ class HiggsfieldClient:
                 headers=self.headers,
                 json={"params": params}
             )
-            response.raise_for_status()
+            if response.status_code >= 400:
+                raise RuntimeError(
+                    f"HTTP {response.status_code} from {response.url.path}: {response.text[:500]}"
+                )
             return response.json()
 
     async def generate_video(
