@@ -1,15 +1,11 @@
 {
   "mcpServers": {
     "higgsfield": {
-      "command": "python",
+      "command": "/Users/kinish.stock/Projects/higgsfield_ai_mcp/.venv/bin/python",
       "args": [
-        "-m",
-        "higgsfield_mcp.server"
+        "/Users/kinish.stock/Projects/higgsfield_ai_mcp/run-mcp.py"
       ],
-      "env": {
-        "HF_API_KEY": "${HF_API_KEY}",
-        "HF_SECRET": "${HF_SECRET}"
-      }
+      "cwd": "/Users/kinish.stock/Projects/higgsfield_ai_mcp"
     }
   }
 }

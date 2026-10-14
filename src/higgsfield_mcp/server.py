@@ -201,8 +201,7 @@ async def generate_video(
                 "motion_id": motion_id,
                 "model": model_map.get(quality, "dop-preview"),
                 "prompt_provided": bool(prompt),
-                "api_key_configured": bool(client.headers.get("hf-api-key")),
-                "api_key_preview": client.headers.get("hf-api-key", "")[:8] + "..." if client.headers.get("hf-api-key") else "NOT SET"
+                "api_key_configured": bool(client.headers.get("hf-api-key"))
             }
         }, indent=2)
 
@@ -416,12 +415,12 @@ async def debug_credentials() -> str:
     Returns:
         Information about credential configuration
     """
+    api_key_configured = bool(client.headers.get("hf-api-key"))
+    secret_configured = bool(client.headers.get("hf-secret"))
     return json.dumps({
-        "api_key_configured": bool(client.headers.get("hf-api-key")),
-        "secret_configured": bool(client.headers.get("hf-secret")),
-        "api_key_preview": client.headers.get("hf-api-key", "")[:8] + "..." if client.headers.get("hf-api-key") else "NOT SET",
-        "base_url": client.base_url,
-        "headers_keys": list(client.headers.keys())
+        "api_key_configured": api_key_configured,
+        "secret_configured": secret_configured,
+        "credentials_configured": api_key_configured and secret_configured
     }, indent=2)
 
 
